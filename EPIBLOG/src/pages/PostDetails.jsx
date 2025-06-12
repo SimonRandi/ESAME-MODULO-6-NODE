@@ -9,7 +9,9 @@ const PostDetails = () => {
 
   const getPostDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:9099/posts/${id}`);
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/posts/${id}`
+      );
       const data = await response.json();
       console.log(data);
       setPostDetails(data.post);

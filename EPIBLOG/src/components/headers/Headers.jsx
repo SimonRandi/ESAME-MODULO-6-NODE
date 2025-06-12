@@ -55,13 +55,16 @@ const Headers = () => {
 
   const signUp = async () => {
     try {
-      const response = await fetch("http://localhost:9099/authors/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/authors/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await response.json();
       setAuthor(data);
     } catch (error) {
@@ -71,13 +74,16 @@ const Headers = () => {
 
   const login = async () => {
     try {
-      const response = await fetch("http://localhost:9099/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(isLogged),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(isLogged),
+        }
+      );
       const data = await response.json();
       console.log(data);
 
