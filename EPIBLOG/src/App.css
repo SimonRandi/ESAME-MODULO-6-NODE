@@ -1,0 +1,7 @@
+.background-class {
+  height: 400px;
+  background-image: url("https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJhJTIwNGt8ZW58MHx8MHx8fDA%3D");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
