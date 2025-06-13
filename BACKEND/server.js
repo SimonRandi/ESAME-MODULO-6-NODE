@@ -22,7 +22,7 @@ server.use(express.json());
 
 server.use(
   cors({
-    origin: ["https://esame-modulo-6-node.vercel.app"],
+    origin: ["esame-modulo-6-node-savi.vercel.app"],
     credentials: true,
   })
 );
