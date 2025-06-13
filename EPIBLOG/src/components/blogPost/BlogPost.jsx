@@ -5,7 +5,10 @@ const BlogPost = () => {
   const [posts, setPosts] = useState([]);
   const getAllPosts = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/posts`);
+      const response = await fetch(
+        "https://esame-modulo-6-node.onrender.com/posts"
+      );
+      console.log("VITE_SERVER_URL =", import.meta.env.VITE_SERVER_URL);
       const data = await response.json();
 
       setPosts(data.posts);
