@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SinglePost from "../singlePost/singlePost";
+import SinglePost from "../singlePost/SinglePost";
 
 const BlogPost = () => {
   const [posts, setPosts] = useState([]);
