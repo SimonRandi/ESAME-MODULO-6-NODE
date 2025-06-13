@@ -20,7 +20,12 @@ server.use("/uploads", express.static(path.join(__dirname, "./uploads")));
 
 server.use(express.json());
 
-server.use(cors());
+server.use(
+  cors({
+    origin: ["https://esame-modulo-6-node.vercel.app/"],
+    credentials: true,
+  })
+);
 
 server.use(loggerMiddleware);
 
