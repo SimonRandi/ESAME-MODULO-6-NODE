@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import "../headers/headers.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ const Headers = () => {
   const [show, setShow] = useState(false);
   const [author, setAuthor] = useState([]);
   const [mode, setMode] = useState("signup");
+  const [message, setMessage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     surName: "",
@@ -49,8 +50,6 @@ const Headers = () => {
     } else {
       await login();
     }
-
-    hideModal();
   };
 
   const signUp = async () => {
@@ -67,6 +66,19 @@ const Headers = () => {
       );
       const data = await response.json();
       setAuthor(data);
+
+      if (response.ok) {
+        setMessage("Iscrizione avenuta con successo");
+        setTimeout(() => setShow(false), 3000);
+        setFormData({
+          name: "",
+          surName: "",
+          email: "",
+          dob: "",
+          password: "",
+          avatar: "https://i.pravatar.cc/150?u=default",
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -94,6 +106,11 @@ const Headers = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLogged({
+        email: "",
+        password: "",
+      });
     }
   };
   return (
@@ -107,6 +124,15 @@ const Headers = () => {
             onClick={() => {
               setMode("signup");
               showModal();
+              console.log("Apro modal signup", formData);
+              setFormData({
+                name: "",
+                surName: "",
+                email: "",
+                dob: "",
+                password: "",
+                avatar: "https://i.pravatar.cc/150?u=default",
+              });
             }}
             className="btn btn-light
           "
@@ -117,6 +143,10 @@ const Headers = () => {
             onClick={() => {
               setMode("login");
               showModal();
+              setIsLogged({
+                email: "",
+                password: "",
+              });
             }}
             className="btn btn-light
           "
@@ -125,7 +155,7 @@ const Headers = () => {
           </button>
         </div>
       </div>
-      <Modal show={show} onHide={hideModal} centered>
+      <Modal key={mode} show={show} onHide={hideModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>
             {mode === "signup" ? "Iscriviti a EpiBlog" : "Accedi"}
@@ -138,6 +168,7 @@ const Headers = () => {
                 <Form.Group className="mb-3" controlId="formName">
                   <Form.Label>Nome</Form.Label>
                   <Form.Control
+                    required="true"
                     name="name"
                     type="text"
                     placeholder="Inserisci il tuo nome"
@@ -148,6 +179,7 @@ const Headers = () => {
                 <Form.Group className="mb-3" controlId="formSurname">
                   <Form.Label>Cognome</Form.Label>
                   <Form.Control
+                    required="true"
                     name="surName"
                     type="text"
                     placeholder="Inserisci il tuo cognome"
@@ -155,9 +187,10 @@ const Headers = () => {
                     onChange={handleChange}
                   />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formName">
+                <Form.Group className="mb-3" controlId="formDate">
                   <Form.Label>Età</Form.Label>
                   <Form.Control
+                    required="true"
                     name="dob"
                     type="date"
                     placeholder="Inserisci la tua età"
@@ -171,8 +204,10 @@ const Headers = () => {
             <Form.Group className="mb-3" controlId="formEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
+                required="true"
                 name="email"
                 type="email"
+                autoComplete="new-email"
                 placeholder="Inserisci la tua email"
                 value={mode === "signup" ? formData.email : isLogged.email}
                 onChange={mode === "signup" ? handleChange : handleLoginChange}
@@ -181,9 +216,13 @@ const Headers = () => {
 
             <Form.Group className="mb-3" controlId="formPassword">
               <Form.Label>Password</Form.Label>
+
               <Form.Control
+                required="true"
+                minLength={8}
                 name="password"
                 type="password"
+                autoComplete="new-password"
                 placeholder={
                   mode === "signup"
                     ? "Crea una password"
@@ -195,13 +234,13 @@ const Headers = () => {
                 onChange={mode === "signup" ? handleChange : handleLoginChange}
               />
             </Form.Group>
+            {message && (
+              <div className="d-flex justify-content-center">
+                <p className="fs-3">{message}</p>
+              </div>
+            )}
 
-            <Button
-              onClick={hideModal}
-              variant="secondary"
-              type="submit"
-              className="w-50"
-            >
+            <Button variant="secondary" type="submit" className="w-50">
               {mode === "signup" ? "Crea account" : "Accedi"}
             </Button>
           </Form>
