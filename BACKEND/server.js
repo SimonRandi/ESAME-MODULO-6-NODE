@@ -24,6 +24,7 @@ server.use(
   cors({
     origin: [
       "https://esame-modulo-6-node-savi-git-main-simone-randines-projects.vercel.app",
+      "http://localhost:5173",
     ],
     credentials: true,
   })
