@@ -70,6 +70,7 @@ const Headers = () => {
       if (response.ok) {
         setMessage("Iscrizione avenuta con successo");
         setTimeout(() => setShow(false), 3000);
+        setTimeout(() => setMessage(""), 3000);
         setFormData({
           name: "",
           surName: "",
@@ -78,7 +79,6 @@ const Headers = () => {
           password: "",
           avatar: "https://i.pravatar.cc/150?u=default",
         });
-        setMessage("");
       }
     } catch (error) {
       console.log(error);
@@ -104,7 +104,6 @@ const Headers = () => {
         setIsLogged(data);
         localStorage.setItem("token", data.token);
         navigate("/dashboard");
-        setMessage("");
       }
     } catch (error) {
       console.log(error);

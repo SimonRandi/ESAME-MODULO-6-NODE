@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import BaseLayout from "../../layout/BaseLayout";
 import { useNavigate } from "react-router-dom";
+import BlogPost from "../blogPost/BlogPost";
+import AddNewPost from "../addNewPost/AddNewPost";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -30,6 +32,10 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-5">
+          <AddNewPost />
+          <BlogPost />
         </div>
       </BaseLayout>
     </>

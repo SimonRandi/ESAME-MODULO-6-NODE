@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import SinglePost from "../singlePost/SinglePost";
+import Spinner from "react-bootstrap/Spinner";
 
 const BlogPost = () => {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const getAllPosts = async () => {
     try {
+      setIsLoading(true);
       console.log("VITE_SERVER_URL =", import.meta.env.VITE_SERVER_URL);
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/posts`);
 
@@ -14,11 +17,21 @@ const BlogPost = () => {
       console.log(posts);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
     getAllPosts();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center">
+        <Spinner animation="grow" />
+      </div>
+    );
+  }
 
   return (
     <>
