@@ -6,7 +6,6 @@ const verifyToken = require("../middlewares/auth/verifyToken");
   const posts = express.Router();
   const postsController = require("../controller/post.controller");
   const { upload, cloudUpload } = require("../middlewares/multer/index");
-  const verify = require("../middlewares/auth/verifyToken");
 
   posts.get("/", postsController.findAll);
   posts.get("/:id", postsController.findPostByid);

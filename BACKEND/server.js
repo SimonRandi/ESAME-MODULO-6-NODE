@@ -13,7 +13,6 @@ const authRoute = require("./routes/auth.route");
 const loggerMiddleware = require("./middlewares/logger");
 const errorHandler = require("./middlewares/errorHandler");
 const path = require("path");
-const verifyToken = require("./middlewares/auth/verifyToken");
 
 const server = express();
 server.use("/uploads", express.static(path.join(__dirname, "./uploads")));
@@ -27,6 +26,7 @@ server.use(
       "http://localhost:5173",
     ],
     credentials: true,
+    allowedHeaders: ["Authorization", "Content-Type"],
   })
 );
 
