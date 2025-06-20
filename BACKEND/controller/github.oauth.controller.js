@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 
 const authGithub = async (request, response, next) => {
   try {
-    const redirectUrl = `http://localhost:5173/success?user=${encodeURIComponent(
-      JSON.stringify(request.user)
-    )}`;
+    const redirectUrl = `${
+      process.env.CLIENT_BASE_URL
+    }/success?user=${encodeURIComponent(JSON.stringify(request.user))}`;
     response.redirect(redirectUrl);
   } catch (error) {
     next(error);
