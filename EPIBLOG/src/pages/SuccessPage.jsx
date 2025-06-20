@@ -1,4 +1,7 @@
-const SuccesPage = () => {
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+const SuccessPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -21,4 +24,4 @@ const SuccesPage = () => {
   );
 };
 
-export default SuccesPage;
+export default SuccessPage;
