@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, FormControl, FormLabel } from "react-bootstrap";
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "react-bootstrap";
 import "../addNewPost/addNewPost.css";
+import { usePosts } from "../../postContext/PostContext";
 
-const AddNewPost = ({ onNewPost }) => {
+const AddNewPost = () => {
   const [newPost, setNewPost] = useState([]);
+  const { getAllPosts } = usePosts();
 
   const [formData, setFormData] = useState({
     category: "",
@@ -56,6 +58,9 @@ const AddNewPost = ({ onNewPost }) => {
           },
           content: "",
         });
+        if (typeof getAllPosts === "function") {
+          getAllPosts();
+        }
       }
 
       setNewPost(data);

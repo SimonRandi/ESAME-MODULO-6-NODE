@@ -1,25 +1,11 @@
 import React, { useEffect, useState } from "react";
 import SinglePost from "../singlePost/SinglePost";
 import Spinner from "react-bootstrap/Spinner";
+import { usePosts } from "../../postContext/PostContext";
 
 const BlogPost = () => {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const getAllPosts = async () => {
-    try {
-      setIsLoading(true);
-      console.log("VITE_SERVER_URL =", import.meta.env.VITE_SERVER_URL);
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/posts`);
+  const { posts, getAllPosts, isLoading } = usePosts();
 
-      const data = await response.json();
-
-      setPosts(data.posts);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
   useEffect(() => {
     getAllPosts();
   }, []);
