@@ -21,9 +21,9 @@ const manageOauthCallback = async (request, response, next) => {
 
     const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1m" });
 
-    const redirectUrl = `http://localhost:5173/success?token=${encodeURIComponent(
-      token
-    )}`;
+    const redirectUrl = `${
+      process.env.CLIENT_BASE_URL
+    }/success?token=${encodeURIComponent(token)}`;
 
     response.redirect(redirectUrl);
   } catch (error) {
