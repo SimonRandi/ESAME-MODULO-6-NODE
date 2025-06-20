@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage";
 import PostDetails from "./pages/PostDetails";
 import Dashboard from "./components/private page/Dashboard";
 import ProtectedRoutes from "./middleware/protectedRoute";
-import SuccesPage from "./pages/SuccessPage";
+import SuccessPage from "./pages/SuccessPage";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
         <Routes>
           <Route index path="/" element={<HomePage />}></Route>
           <Route path="/post/:id" element={<PostDetails />}></Route>
-          <Route path="/success" element={<SuccesPage />}></Route>
+          <Route path="/success" element={<SuccessPage />}></Route>
           <Route element={<ProtectedRoutes />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
