@@ -22,11 +22,10 @@ server.use(express.json());
 server.use(
   cors({
     origin: [
-      "https://esame-modulo-6-node-savi.vercel.app/",
+      "https://esame-modulo-6-node-savi.vercel.app",
       "http://localhost:5173",
     ],
     credentials: true,
-    allowedHeaders: ["Authorization", "Content-Type"],
   })
 );
 
