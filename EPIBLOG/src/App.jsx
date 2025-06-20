@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage";
 import PostDetails from "./pages/PostDetails";
 import Dashboard from "./components/private page/Dashboard";
 import ProtectedRoutes from "./middleware/protectedRoute";
-import SuccesPage from "./pages/succesPage";
+import SuccesPage from "./pages/SuccessPage";
 
 const App = () => {
   return (
