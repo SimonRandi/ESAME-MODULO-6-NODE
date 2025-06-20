@@ -1,5 +1,14 @@
 const mongoose = require("mongoose");
 
+const CommentSchema = new mongoose.Schema({
+  user: String,
+  text: String,
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const PostSchema = new mongoose.Schema(
   {
     category: {
@@ -14,7 +23,7 @@ const PostSchema = new mongoose.Schema(
     },
     cover: {
       type: String,
-      default: "https://lorem.picsum/200/200",
+      default: "https://picsum.photos/200/200",
     },
     readTime: {
       value: {
@@ -37,6 +46,7 @@ const PostSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "author",
     },
+    comments: [CommentSchema],
   },
   {
     timestamps: true,

@@ -80,6 +80,16 @@ const updateCover = async (payload, id) => {
   return postSchema.findByIdAndUpdate(payload, id, option);
 };
 
+const addComment = async (id, comment) => {
+  const post = await postSchema.findById(id);
+  if (!post) {
+    throw new postNotFoundException();
+  }
+  post.comments.push(comment);
+  await post.save();
+  return post;
+};
+
 module.exports = {
   findAll,
   findPostById,
@@ -88,4 +98,5 @@ module.exports = {
   updatePost,
   updateCover,
   findByCategory,
+  addComment,
 };

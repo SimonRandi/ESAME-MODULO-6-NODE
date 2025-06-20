@@ -7,7 +7,7 @@ const findAll = async (request, response, next) => {
   try {
     const {
       page = 1,
-      pageSize = 10,
+      pageSize = 40,
       field = "category",
       order = "asc",
     } = request.query;
@@ -181,10 +181,28 @@ const saveFileOnDisk = async (request, response, next) => {
 
 const saveOnCloud = async (request, response, next) => {
   try {
+    console.log(request.file.path);
     response.status(200).send({
       statusCode: 200,
-      image: request.file.path,
+      imageUrl: request.file.path,
       fileInfo: request.file,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const addComment = async (request, response, next) => {
+  try {
+    const { user, text } = request.body;
+    const updatedPost = await postService.addComment(request.params.id, {
+      user,
+      text,
+    });
+    response.status(200).send({
+      statusCode: 200,
+      message: "commento aggiunto con successo",
+      updatePost,
     });
   } catch (error) {
     next(error);
@@ -201,4 +219,5 @@ module.exports = {
   findByCategory,
   saveFileOnDisk,
   saveOnCloud,
+  addComment,
 };

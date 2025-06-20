@@ -5,11 +5,11 @@ const cors = require("cors");
 require("dotenv").config();
 const PORT = process.env.PORT || 9099;
 
-const userRoute = require("./routes/user.route");
 const authorRoute = require("./routes/author.route");
 const postRoute = require("./routes/post.route");
-const addressRoute = require("./routes/address.route");
+
 const authRoute = require("./routes/auth.route");
+const oauthRoute = require("./routes/oauth.route");
 const loggerMiddleware = require("./middlewares/logger");
 const errorHandler = require("./middlewares/errorHandler");
 const path = require("path");
@@ -32,11 +32,10 @@ server.use(
 
 server.use(loggerMiddleware);
 
-server.use("/users", userRoute);
 server.use("/authors", authorRoute);
 server.use("/posts", postRoute);
-server.use("/address", addressRoute);
 server.use("/auth", authRoute);
+server.use("/", oauthRoute);
 
 server.use(errorHandler);
 
