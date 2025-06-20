@@ -5,8 +5,9 @@ import { Check } from "lucide-react";
 import { Button } from "react-bootstrap";
 import "../addNewPost/addNewPost.css";
 
-const AddNewPost = () => {
+const AddNewPost = ({ onNewPost }) => {
   const [newPost, setNewPost] = useState([]);
+
   const [formData, setFormData] = useState({
     category: "",
     title: "",
@@ -19,6 +20,7 @@ const AddNewPost = () => {
   });
   const [isUploading, setIsUploading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [uploadSucces, setUploadSuccess] = useState("");
 
   const addPost = async () => {
     const token = localStorage.getItem("token");
@@ -40,6 +42,22 @@ const AddNewPost = () => {
         }
       );
       const data = await response.json();
+      console.log(data);
+
+      if (response.ok) {
+        setUploadSuccess("Post caricato con successo");
+        setFormData({
+          category: "",
+          title: "",
+          cover: "",
+          readTime: {
+            value: "",
+            unit: "",
+          },
+          content: "",
+        });
+      }
+
       setNewPost(data);
     } catch (error) {
       console.log(error);
@@ -52,10 +70,7 @@ const AddNewPost = () => {
 
     setIsUploading(true);
     setIsSuccess(false);
-    setFormData((prev) => ({
-      ...prev,
-      cover: file,
-    }));
+
     const formDataImg = new FormData();
     formDataImg.append("image", file);
 
@@ -67,14 +82,15 @@ const AddNewPost = () => {
           body: formDataImg,
         }
       );
-
       const data = await response.json();
+      console.log(data.imageUrl);
 
       if (response.ok) {
         setFormData((prev) => ({
           ...prev,
           cover: data.imageUrl,
         }));
+
         setIsSuccess(true);
       } else {
         alert("erroe nel caricamento della immagine");
@@ -107,6 +123,7 @@ const AddNewPost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addPost();
+
     setFormData({
       category: "",
       title: "",
@@ -121,11 +138,12 @@ const AddNewPost = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-center ">
+      <div className="d-flex justify-content-center custom ">
         <Form className="container-custom" onSubmit={handleSubmit}>
           <Form.Group controlId="formCategory">
             <Form.Label> Categoria</Form.Label>
             <Form.Control
+              className="border-5 rounded-3"
               type="text"
               name="category"
               placeholder="Categoria del post"
@@ -137,6 +155,7 @@ const AddNewPost = () => {
           <Form.Group controlId="formTitle">
             <Form.Label> Titolo</Form.Label>
             <Form.Control
+              className="border-5 rounded-3"
               type="text"
               name="title"
               placeholder="Titolo del post"
@@ -148,11 +167,18 @@ const AddNewPost = () => {
           <Form.Group controlId="formCover">
             <Form.Label> Copertina</Form.Label>
             <Form.Control
+              className="border-5 rounded-3"
               type="file"
               name="cover"
               accept="image/*"
               onChange={handleCoverUpload}
             />
+            {formData.cover && (
+              <img
+                src={`${import.meta.env.VITE_SERVER_URL}/${formData.cover}`}
+                alt="copertina del post"
+              />
+            )}
 
             {isUploading && <span>Caricamento in corso...</span>}
             {isSuccess && <Check color="green" />}
@@ -160,6 +186,7 @@ const AddNewPost = () => {
           <Form.Group controlId="formReadTimeValue">
             <FormLabel>Tempo di lettura</FormLabel>
             <Form.Control
+              className="border-5 rounded-3"
               type="text"
               name="readTime.value"
               value={formData.readTime.value}
@@ -170,6 +197,7 @@ const AddNewPost = () => {
           <Form.Group controlId="formReadTimeUnit">
             <FormLabel>Unità</FormLabel>
             <Form.Control
+              className="border-5 rounded-3"
               as="select"
               name="readTime.unit"
               value={formData.readTime.unit}
@@ -184,6 +212,7 @@ const AddNewPost = () => {
           <Form.Group controlId="formContent">
             <FormLabel>Testo del Post</FormLabel>
             <Form.Control
+              className="border-5 rounded-3"
               as="textarea"
               rows={6}
               name="content"
@@ -191,6 +220,7 @@ const AddNewPost = () => {
               onChange={handleChange}
             />
           </Form.Group>
+          {uploadSucces && <p>{uploadSucces}</p>}
 
           <Button
             className="mt-3

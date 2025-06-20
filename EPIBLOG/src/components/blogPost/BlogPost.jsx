@@ -14,7 +14,6 @@ const BlogPost = () => {
       const data = await response.json();
 
       setPosts(data.posts);
-      console.log(posts);
     } catch (error) {
       console.log(error);
     } finally {

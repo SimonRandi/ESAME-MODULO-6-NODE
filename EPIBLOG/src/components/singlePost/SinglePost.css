@@ -1,4 +1,7 @@
-.img-dimension {
-  height: 500px;
-  width: 100%;
+.custom-card {
+  width: 600px;
+}
+
+.img-custom {
+  height: 400px;
 }

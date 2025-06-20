@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import BaseLayout from "../../layout/BaseLayout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import BlogPost from "../blogPost/BlogPost";
 import AddNewPost from "../addNewPost/AddNewPost";
+import useSession from "../../hooks/useSession";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-
+  const user = useSession();
   const logOut = () => {
     localStorage.removeItem("token");
     navigate("/");
@@ -24,7 +25,7 @@ const Dashboard = () => {
           <div className="row">
             <div className="col-12">
               <div className="d-flex flex-column justify-content-center align-items-center mt-5">
-                <h2>Benvenuto Utente</h2>
+                <h2>{`Benvenuto ${user.name}`}</h2>
                 <p>
                   In questa sezione potrai contribuire anche tu al nostro blog
                   parlandoci di qualche argomento che ti sta davvero a cuore

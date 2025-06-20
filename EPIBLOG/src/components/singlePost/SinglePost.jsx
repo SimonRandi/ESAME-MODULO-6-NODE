@@ -7,19 +7,19 @@ import { Link } from "react-router-dom";
 const SinglePost = ({ post }) => {
   return (
     <>
-      <div className="col-12 col-md-4 d-md-flex col-lg-4 d-lg-flex mt-2  ">
-        <Card className="border-4 rounded-4">
+      <div className="col-12 col-md-4 d-md-flex col-lg-4 d-flex mt-3 ">
+        <Card className="border-4 rounded-4 custom-card">
           <Card.Img
-            className="img-dimension"
+            className="img-custom"
             variant="top"
-            src={post.cover || "https://lorem.picsum.photos/200/200"}
+            src={post.cover ? post.cover : <div>Nessuna foto dispinibile</div>}
           />
           <Card.Body>
             <Card.Title>{post.title}</Card.Title>
             <Card.Text>{post.content.slice(0, 300)}...</Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
-            <ListGroup.Item>Autore: {post.auhtor?.name}</ListGroup.Item>
+            <ListGroup.Item>Autore: {post.author?.name}</ListGroup.Item>
             <ListGroup.Item>
               Tempo di lettura: {post.readTime.value.$numberDecimal}{" "}
               {post.readTime.unit}

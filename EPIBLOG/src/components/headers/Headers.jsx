@@ -2,6 +2,7 @@ import React, { use, useState } from "react";
 import "../headers/headers.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { Github } from "lucide-react";
 
 const Headers = () => {
   const [show, setShow] = useState(false);
@@ -114,6 +115,10 @@ const Headers = () => {
       });
     }
   };
+
+  const onRedirectGithub = () => {
+    window.location.href = `${import.meta.env.VITE_SERVER_URL}/github`;
+  };
   return (
     <>
       <div className="d-flex flex-column justify-content-center background-custom">
@@ -205,7 +210,7 @@ const Headers = () => {
             <Form.Group className="mb-3" controlId="formEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
-                required="true"
+                required={mode === "signUp" ? true : false}
                 name="email"
                 type="email"
                 autoComplete="new-email"
@@ -219,7 +224,7 @@ const Headers = () => {
               <Form.Label>Password</Form.Label>
 
               <Form.Control
-                required="true"
+                required={mode === "signUp" ? true : false}
                 minLength={8}
                 name="password"
                 type="password"
@@ -244,6 +249,9 @@ const Headers = () => {
             <Button variant="secondary" type="submit" className="w-50">
               {mode === "signup" ? "Crea account" : "Accedi"}
             </Button>
+            <button onClick={onRedirectGithub} className="btn btn-success ms-3">
+              <Github /> Github
+            </button>
           </Form>
         </Modal.Body>
       </Modal>
