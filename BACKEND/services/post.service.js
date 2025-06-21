@@ -1,6 +1,7 @@
 const postSchema = require("../models/PostSchema");
 const author = require("../models/authorSchema");
 const postNotFoundException = require("../exceptions/post/postNotFoundException");
+const commentNotFoundException = require("../exceptions/post/commentNotFoundException");
 
 const findAll = async (page, pageSize, field, order) => {
   const posts = await postSchema
@@ -90,6 +91,22 @@ const addComment = async (id, comment) => {
   return post;
 };
 
+const deleteComment = async (id) => {
+  console.log("id ricevuto", id);
+  const postToUpdate = await postSchema.findOneAndUpdate(
+    { "comments._id": id },
+
+    { $pull: { comments: { _id: id } } },
+    { new: true }
+  );
+
+  if (!postToUpdate) {
+    throw new commentNotFoundException();
+  }
+
+  return { message: "commento eliminato con successo", post: postToUpdate };
+};
+
 module.exports = {
   findAll,
   findPostById,
@@ -99,4 +116,5 @@ module.exports = {
   updateCover,
   findByCategory,
   addComment,
+  deleteComment,
 };

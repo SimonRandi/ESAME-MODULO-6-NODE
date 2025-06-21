@@ -2,6 +2,7 @@ const { response, request } = require("express");
 const postService = require("../services/post.service");
 const PostSchema = require("../models/PostSchema");
 const PostNotFound = require("../exceptions/post/postNotFoundException");
+const commentNotFoundException = require("../exceptions/post/commentNotFoundException");
 
 const findAll = async (request, response, next) => {
   try {
@@ -209,6 +210,24 @@ const addComment = async (request, response, next) => {
   }
 };
 
+const deleteComment = async (request, response, next) => {
+  try {
+    const { id } = request.params;
+    const commentToDelete = await postService.deleteComment(id);
+
+    if (!commentToDelete) {
+      throw new commentNotFoundException();
+    }
+
+    response.status(200).send({
+      statusCode: 200,
+      message: "Commento eliminato con successo",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   findAll,
   findPostByid,
@@ -220,4 +239,5 @@ module.exports = {
   saveFileOnDisk,
   saveOnCloud,
   addComment,
+  deleteComment,
 };

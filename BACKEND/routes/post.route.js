@@ -12,6 +12,7 @@ const verifyToken = require("../middlewares/auth/verifyToken");
   posts.get("/search/category", postsController.findByCategory);
   posts.post("/create", [verifyToken], postsController.createPost);
   posts.post("/create/:id/comments", postsController.addComment);
+  posts.delete("/delete/:id/comments", postsController.deleteComment);
   posts.post(
     "/int-upload",
     upload.single("image"),
