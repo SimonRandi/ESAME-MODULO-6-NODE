@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CommentList from "../components/commentList/CommentList";
 
 import BaseLayout from "../layout/BaseLayout";
+import "../pages/postDetails.css";
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -19,6 +20,13 @@ const PostDetails = () => {
     e.preventDefault();
     addComment({ user: "Utente", text });
     setText("");
+  };
+
+  const handleCommentDeleted = (id) => {
+    setPostDetails((prev) => ({
+      ...prev,
+      comments: prev.comments.filter((comment) => comment._id !== id),
+    }));
   };
 
   const getPostDetails = async () => {
@@ -51,7 +59,7 @@ const PostDetails = () => {
           ...prev,
           comments: data.comments,
         }));
-        await getPostDetails();
+        getPostDetails();
       }
     } catch (error) {
       console.log(error);
@@ -100,7 +108,11 @@ const PostDetails = () => {
                       </form>
                     </div>
                     <div className="d-flex justify-content-center">
-                      <CommentList comments={postDetails.comments || []} />
+                      <CommentList
+                        comments={postDetails.comments || []}
+                        setPostDetails={setPostDetails}
+                        onCommentsChange={handleCommentDeleted}
+                      />
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,22 @@
 import React from "react";
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, onCommentsChange }) => {
+  const deleteComment = async (id) => {
+    console.log(id);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/posts/delete/${id}/comments`,
+        { method: "DELETE" }
+      );
+
+      if (response.ok) {
+        onCommentsChange(id);
+      }
+    } catch (error) {
+      alert("Errore nella cancellazione del post");
+    }
+  };
+
   console.log(comments);
   return (
     <>
@@ -14,8 +30,12 @@ const CommentList = ({ comments }) => {
             >
               <span className="me-2">{comment.text}</span>
               <div className="d-flex gap-2">
-                <button className="btn btn-info btn-sm">Modifica</button>
-                <button className="btn btn-danger btn-sm">Cancella</button>
+                <button
+                  onClick={() => deleteComment(comment._id)}
+                  className="btn btn-danger btn-sm"
+                >
+                  Cancella
+                </button>
               </div>
             </li>
           ))}
