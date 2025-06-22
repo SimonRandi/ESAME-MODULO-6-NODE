@@ -19,8 +19,9 @@ const OauthPage = () => {
   }, []);
   return (
     <>
-      <div>
-        <p>Login in corso</p>
+      <div className="d-flex flex-column justify-content-center align-items-center">
+        <h1>Login andato a buon fine!!</h1>
+        <p>verrai rindirizzato alla tua pagina personale</p>
       </div>
     </>
   );
