@@ -23,10 +23,7 @@ const PostDetails = () => {
   };
 
   const handleCommentDeleted = (id) => {
-    setPostDetails((prev) => ({
-      ...prev,
-      comments: prev.comments.filter((comment) => comment._id !== id),
-    }));
+    getPostDetails();
   };
 
   const getPostDetails = async () => {
@@ -77,7 +74,7 @@ const PostDetails = () => {
             <div className="row">
               <div className="col">
                 <div className="d-flex justify-content-center mb-2 mt-5">
-                  <img className="img-fluid" src={postDetails.cover} alt="" />
+                  <img className="img-custom" src={postDetails.cover} alt="" />
                 </div>
 
                 <div className="d-flex flex-column align-items-center">

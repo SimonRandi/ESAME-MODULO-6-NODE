@@ -10,7 +10,9 @@ const OauthPage = () => {
     const token = params.get("token");
     if (token) {
       localStorage.setItem("token", token);
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 3000);
     } else {
       navigate("/");
     }

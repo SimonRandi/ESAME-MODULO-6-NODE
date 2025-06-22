@@ -1,7 +1,9 @@
 .custom-card {
   width: 600px;
+  height: 700px;
 }
 
-.img-custom {
-  height: 400px;
+.custom-img {
+  height: 300px;
+  min-height: 300px;
 }
