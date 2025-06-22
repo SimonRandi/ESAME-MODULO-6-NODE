@@ -199,6 +199,7 @@ const addComment = async (request, response, next) => {
     const updatedPost = await postService.addComment(request.params.id, {
       user,
       text,
+      date: new Date(),
     });
     response.status(200).send({
       statusCode: 200,
@@ -228,6 +229,26 @@ const deleteComment = async (request, response, next) => {
   }
 };
 
+const updateComment = async (request, response, next) => {
+  try {
+    const { id } = request.params;
+    const { text } = request.body;
+    const updatetedPost = await postService.updateComment(id, text);
+
+    if (!updatetedPost) {
+      throw new commentNotFoundException();
+    }
+
+    response.status(200).send({
+      statusCode: 200,
+      message: "Commento modificato con successo",
+      post: updatetedPost.post,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   findAll,
   findPostByid,
@@ -240,4 +261,5 @@ module.exports = {
   saveOnCloud,
   addComment,
   deleteComment,
+  updateComment,
 };

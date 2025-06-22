@@ -13,6 +13,7 @@ const verifyToken = require("../middlewares/auth/verifyToken");
   posts.post("/create", [verifyToken], postsController.createPost);
   posts.post("/create/:id/comments", postsController.addComment);
   posts.delete("/delete/:id/comments", postsController.deleteComment);
+  posts.put("/update/:id/comments", postsController.updateComment);
   posts.post(
     "/int-upload",
     upload.single("image"),

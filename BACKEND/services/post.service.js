@@ -107,6 +107,21 @@ const deleteComment = async (id) => {
   return { message: "commento eliminato con successo", post: postToUpdate };
 };
 
+const updateComment = async (id, newText) => {
+  console.log("id ricevuto", id);
+  const postToUpdate = await postSchema.findOneAndUpdate(
+    { "comments._id": id },
+    { $set: { "comments.$.text": newText } },
+    { new: true }
+  );
+
+  if (!postToUpdate) {
+    throw new commentNotFoundException();
+  }
+
+  return { message: "commento modificato con successo", post: postToUpdate };
+};
+
 module.exports = {
   findAll,
   findPostById,
@@ -117,4 +132,5 @@ module.exports = {
   findByCategory,
   addComment,
   deleteComment,
+  updateComment,
 };

@@ -20,7 +20,13 @@ const manageOauthCallback = async (request, response, next) => {
       return response.redirect("/");
     }
 
-    const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "24h" });
+    const token = jwt.sign(
+      {
+        name: user.displayName || user.userName || "Github user",
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
     console.log("CLIENT_BASE_URL:", process.env.CLIENT_BASE_URL);
     const redirectUrl = `${
       process.env.CLIENT_BASE_URL
