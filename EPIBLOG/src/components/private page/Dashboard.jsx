@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import BlogPost from "../blogPost/BlogPost";
 import AddNewPost from "../addNewPost/AddNewPost";
 import useSession from "../../hooks/useSession";
+import "../private page/dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();

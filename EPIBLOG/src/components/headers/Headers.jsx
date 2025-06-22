@@ -125,7 +125,7 @@ const Headers = () => {
         <h2 className="custom-text">
           "Non aspettare che accada qualcosa di straordinario. Scrivilo."
         </h2>
-        <div className="d-flex gap-3 justify-content-center">
+        <div className="d-flex gap-3 justify-content-center mt-3">
           <button
             onClick={() => {
               setMode("signup");

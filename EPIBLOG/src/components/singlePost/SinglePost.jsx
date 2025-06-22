@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const SinglePost = ({ post }) => {
   return (
     <>
-      <div className="col-12 col-md-3 d-md-flex col-lg-3 d-flex mt-3 ">
+      <div className="col-12 col-md-4 d-md-flex col-lg-3 d-flex mt-3 ">
         <Card className=" rounded-4 custom-card">
           <Card.Img
             className="custom-img"

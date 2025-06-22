@@ -12,8 +12,9 @@ const BlogPost = () => {
 
   if (isLoading) {
     return (
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-4">
         <Spinner animation="grow" />
+        Loading..
       </div>
     );
   }

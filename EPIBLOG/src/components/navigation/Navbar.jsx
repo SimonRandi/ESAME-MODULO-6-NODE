@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col"></div>
-        </div>
-      </div>
-      <div className="navBackground-class">
+      <div className="navBackground-class px-3">
         <nav className="navbar navbar-expand-lg bg-transparent text-white">
           <div className="container-fluid">
             <Link className="text-decoration-none text-light" to="/">
