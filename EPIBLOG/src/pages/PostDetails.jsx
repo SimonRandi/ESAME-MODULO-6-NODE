@@ -108,7 +108,7 @@ const PostDetails = () => {
                           className="form-control border-4 mb-2 "
                         />
                         <div className="d-flex justify-content-center">
-                          <button type="submit" className="btn btn-info">
+                          <button type="submit" className="btn-custom">
                             Invia
                           </button>
                         </div>

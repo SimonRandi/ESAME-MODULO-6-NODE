@@ -228,7 +228,7 @@ const AddNewPost = () => {
           {uploadSucces && <p>{uploadSucces}</p>}
 
           <Button
-            className="mt-3
+            className="mt-3 btn-custom
             
           "
             type="submit"
