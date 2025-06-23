@@ -29,13 +29,12 @@ const Navbar = () => {
                     HOME
                   </Link>
                 </li>
+
                 <li className="nav-item mx-5">
-                  <Link className="fs-3 text-decoration-none text-light" to="/">
-                    AUTHOR
-                  </Link>
-                </li>
-                <li className="nav-item mx-5">
-                  <Link className="fs-3 text-decoration-none text-light" to="/">
+                  <Link
+                    className="fs-3 text-decoration-none text-light"
+                    to="/blogPost"
+                  >
                     BLOG POST
                   </Link>
                 </li>

@@ -10,6 +10,7 @@ import Dashboard from "./components/private page/Dashboard";
 import ProtectedRoutes from "./middleware/protectedRoute";
 
 import OauthPage from "./pages/OauthPage";
+import BlogPostPage from "./pages/BlogPostPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route index path="/" element={<HomePage />}></Route>
           <Route path="/post/:id" element={<PostDetails />}></Route>
+          <Route path="/blogPost" element={<BlogPostPage />}></Route>
           <Route path="/success" element={<OauthPage />}></Route>
           <Route element={<ProtectedRoutes />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>

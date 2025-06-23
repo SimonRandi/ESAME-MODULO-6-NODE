@@ -19,15 +19,23 @@ const SinglePost = ({ post }) => {
             <Card.Text className="text-truncate ">{post.content}...</Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
-            {/* <ListGroup.Item>Autore: {post.author?.name}</ListGroup.Item> */}
-            <ListGroup.Item>
+            <ListGroup.Item className="background">
               Tempo di lettura: {post.readTime.value.$numberDecimal}{" "}
               {post.readTime.unit}
             </ListGroup.Item>
-            <ListGroup.Item>Categoria: {post.category}</ListGroup.Item>
+            <ListGroup.Item className="background">
+              Categoria: {post.category}
+            </ListGroup.Item>
           </ListGroup>
           <Card.Body>
-            <Link to={`/post/${post._id}`}>scopri di piu</Link>
+            <div className="d-flex justify-content-center align-items-center">
+              <Link
+                className="text-decoration-none text-black"
+                to={`/post/${post._id}`}
+              >
+                <button className="btn-custom">scopri di piu</button>
+              </Link>
+            </div>
           </Card.Body>
         </Card>
       </div>

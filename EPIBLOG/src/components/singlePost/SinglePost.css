@@ -1,9 +1,23 @@
 .custom-card {
   width: 600px;
   height: 700px;
+  background-color: rgb(246, 185, 185);
+}
+
+.background {
+  background-color: rgb(246, 185, 185);
+  border: none;
 }
 
 .custom-img {
   height: 300px;
   min-height: 300px;
+}
+
+.btn-custom {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: rgb(244, 144, 144);
+  margin-top: 40px;
+  border: none;
 }

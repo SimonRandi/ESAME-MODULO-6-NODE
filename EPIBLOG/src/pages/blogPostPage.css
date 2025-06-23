@@ -1,0 +1,10 @@
+.custom-button {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: rgb(244, 144, 144);
+  border: none;
+}
+
+body {
+  background-color: rgb(245, 203, 203);
+}

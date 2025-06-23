@@ -95,12 +95,12 @@ const CommentList = ({ comments, onCommentsChange }) => {
                   <>
                     <button
                       onClick={() => deleteComment(comment._id)}
-                      className="btn-custom"
+                      className="button-custom"
                     >
                       <Trash color="red" />
                     </button>
                     <button
-                      className="btn-custom"
+                      className="button-custom"
                       onClick={() => startEditing(comment)}
                     >
                       <Pencil color="green" />

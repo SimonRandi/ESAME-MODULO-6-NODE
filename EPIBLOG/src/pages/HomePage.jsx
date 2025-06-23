@@ -1,14 +1,14 @@
 import React from "react";
 import BaseLayout from "../layout/BaseLayout";
 import Headers from "../components/headers/Headers";
-import BlogPost from "../components/blogPost/BlogPost";
+import HeroSection from "../components/heroSection/HeroSection";
 
 const HomePage = () => {
   return (
     <>
       <BaseLayout>
         <Headers />
-        <BlogPost />
+        <HeroSection />
       </BaseLayout>
     </>
   );

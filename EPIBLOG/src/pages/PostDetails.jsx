@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import CommentList from "../components/commentList/CommentList";
 
 import BaseLayout from "../layout/BaseLayout";
 import "../pages/postDetails.css";
+
+import { ArrowBigLeft } from "lucide-react";
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -69,6 +71,12 @@ const PostDetails = () => {
   return (
     <>
       <BaseLayout>
+        <Link to={"/blogPost"}>
+          <button className="btn-custom ms-4">
+            {" "}
+            <ArrowBigLeft /> Indietro
+          </button>
+        </Link>
         {postDetails && (
           <div className="container d-flex flex-column justify-content-center align-items-center">
             <div className="row">
@@ -80,7 +88,9 @@ const PostDetails = () => {
                 <div className="d-flex flex-column align-items-center">
                   <h2 className="text-center">{postDetails.title}</h2>
                   <div className="d-flex justify-content-center align-items-center">
-                    <p className="text-center py-3">{postDetails.content}</p>
+                    <p className="text-center py-3 fs-3 lh-base">
+                      {postDetails.content}
+                    </p>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import "../headers/headers.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -119,6 +119,10 @@ const Headers = () => {
   const onRedirectGithub = () => {
     window.location.href = `${import.meta.env.VITE_SERVER_URL}/github`;
   };
+
+  useEffect(() => {
+    localStorage.removeItem("token");
+  }, []);
   return (
     <>
       <div className="d-flex flex-column justify-content-center background-custom">
