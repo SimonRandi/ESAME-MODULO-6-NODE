@@ -28,13 +28,6 @@ const AuthorSchema = new mongoose.Schema(
       required: true,
       min: 8,
     },
-    address: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "address",
-        default: [],
-      },
-    ],
 
     posts: [
       {
