@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Form, FormControl, FormLabel } from "react-bootstrap";
 import { useState } from "react";
 import { Check } from "lucide-react";
@@ -9,6 +9,8 @@ import { usePosts } from "../../postContext/PostContext";
 const AddNewPost = () => {
   const [newPost, setNewPost] = useState([]);
   const { getAllPosts } = usePosts();
+
+  const fileInputRef = useRef(null);
 
   const [formData, setFormData] = useState({
     category: "",
@@ -58,9 +60,16 @@ const AddNewPost = () => {
           },
           content: "",
         });
+
+        if (fileInputRef.current) {
+          fileInputRef.current.value = null;
+        }
         if (typeof getAllPosts === "function") {
           getAllPosts();
         }
+        setTimeout(() => {
+          setUploadSuccess("");
+        }, 3000);
       }
 
       setNewPost(data);
@@ -173,17 +182,12 @@ const AddNewPost = () => {
             <Form.Label> Copertina</Form.Label>
             <Form.Control
               className="border-5 rounded-3"
+              ref={fileInputRef}
               type="file"
               name="cover"
               accept="image/*"
               onChange={handleCoverUpload}
             />
-            {formData.cover && (
-              <img
-                src={`${import.meta.env.VITE_SERVER_URL}/${formData.cover}`}
-                alt="copertina del post"
-              />
-            )}
 
             {isUploading && <span>Caricamento in corso...</span>}
             {isSuccess && <Check color="green" />}
